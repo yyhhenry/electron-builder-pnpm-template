@@ -8,44 +8,44 @@ import { isDevelopmentMode } from './isDevelopmentMode';
 const mainFolder = path.dirname(__dirname);
 const resourcesFolder = path.join(mainFolder, '../resources');
 if (!isDevelopmentMode) {
-    Menu.setApplicationMenu(null);
+  Menu.setApplicationMenu(null);
 }
 const createWindow = () => {
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        minWidth: 800,
-        minHeight: 600,
-        titleBarStyle: 'hidden',
-        titleBarOverlay: {
-            color: 'rgb(68, 132, 229)',
-            symbolColor: 'white',
-        },
-        webPreferences: {
-            preload: path.join(mainFolder, 'electron/preload.js'),
-        },
-        show: false,
-    });
-    mainWindow.on('ready-to-show', () => mainWindow.show());
-    if (isDevelopmentMode) {
-        mainWindow.loadURL('http://localhost:3000');
-    } else {
-        mainWindow.loadFile(path.join(mainFolder, 'src/index.html'));
-    }
-    mainWindow.setIcon(path.join(resourcesFolder, 'icon.png'));
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    minWidth: 800,
+    minHeight: 600,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: 'rgb(68, 132, 229)',
+      symbolColor: 'white',
+    },
+    webPreferences: {
+      preload: path.join(mainFolder, 'electron/preload.js'),
+    },
+    show: false,
+  });
+  mainWindow.on('ready-to-show', () => mainWindow.show());
+  if (isDevelopmentMode) {
+    mainWindow.loadURL('http://localhost:3000');
+  } else {
+    mainWindow.loadFile(path.join(mainFolder, 'src/index.html'));
+  }
+  mainWindow.setIcon(path.join(resourcesFolder, 'icon.png'));
 };
 
 app.whenReady().then(async () => {
-    await handleWholeModule(wholeHandler);
-    createWindow();
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    });
+  await handleWholeModule(wholeHandler);
+  createWindow();
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });

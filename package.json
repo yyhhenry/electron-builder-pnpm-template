@@ -1,73 +1,79 @@
 {
-    "name": "electron-builder-pnpm-template",
-    "version": "1.0.0",
-    "keywords": [],
-    "author": "yyhhenry",
-    "license": "ISC",
-    "description": "Electron Builder Pnpm Template",
-    "main": "dist/electron/main.js",
-    "scripts": {
-        "fn:vue-dev": "vite --port 3000",
-        "fn:electron-dev": "cross-env ELECTRON_DISABLE_SECURITY_WARNINGS=true MODE='development' electron .",
-        "fn:app-parallel-dev": "run-p fn:vue-dev fn:electron-dev",
-        "fn:vite-type-check": "vue-tsc --noEmit",
-        "fn:vite-rollup": "vite build",
-        "fn:electron-compile": "vite build --config vite-electron.config.ts",
-        "fn:electron-rollup": "electron-builder",
-        "fn:electron-build": "run-s fn:electron-compile fn:electron-rollup",
-        "fn:vite-build": "run-s fn:vite-type-check fn:vite-rollup",
-        "preload-recompile": "run-s fn:electron-compile",
-        "dev": "run-s fn:electron-compile fn:app-parallel-dev",
-        "build": "run-s fn:vite-build fn:electron-build"
+  "name": "electron-builder-pnpm-template",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "yyhhenry",
+  "license": "ISC",
+  "description": "Electron Builder Pnpm Template",
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "fn:vue-dev": "vite --port 3000",
+    "fn:electron-dev": "cross-env ELECTRON_DISABLE_SECURITY_WARNINGS=true MODE='development' electron .",
+    "fn:app-parallel-dev": "run-p fn:vue-dev fn:electron-dev",
+    "fn:vite-type-check": "vue-tsc --noEmit",
+    "fn:vite-rollup": "vite build",
+    "fn:electron-compile": "vite build --config vite-electron.config.ts",
+    "fn:electron-rollup": "electron-builder",
+    "fn:electron-build": "run-s fn:electron-compile fn:electron-rollup",
+    "fn:vite-build": "run-s fn:vite-type-check fn:vite-rollup",
+    "preload-recompile": "run-s fn:electron-compile",
+    "dev": "run-s fn:electron-compile fn:app-parallel-dev",
+    "build": "run-s fn:vite-build fn:electron-build",
+    "format": "prettier --write .",
+    "lint": "eslint --ext .ts,.js,.vue --fix ."
+  },
+  "build": {
+    "productName": "Electron Builder Pnpm Template",
+    "files": [
+      "dist",
+      "resources"
+    ],
+    "directories": {
+      "output": "electron-dist"
     },
-    "build": {
-        "productName": "Electron Builder Pnpm Template",
-        "files": [
-            "dist",
-            "resources"
-        ],
-        "directories": {
-            "output": "electron-dist"
-        },
-        "win": {
-            "icon": "resources/icon.png"
-        },
-        "extraFiles": [
-            {
-                "from": "extraFiles",
-                "to": "extraFiles"
-            }
-        ],
-        "linux": {
-            "target": "snap",
-            "icon": "resources/icon.png",
-            "category": "Development"
-        },
-        "nsis": {
-            "oneClick": false,
-            "allowToChangeInstallationDirectory": true
-        }
+    "win": {
+      "icon": "resources/icon.png"
     },
-    "dependencies": {
-        "@element-plus/icons-vue": "^2.1.0",
-        "@vueuse/core": "^10.4.1",
-        "element-plus": "^2.3.14",
-        "sass": "^1.68.0",
-        "uuid": "^9.0.1",
-        "vue": "^3.3.4"
+    "extraFiles": [
+      {
+        "from": "extraFiles",
+        "to": "extraFiles"
+      }
+    ],
+    "linux": {
+      "target": "snap",
+      "icon": "resources/icon.png",
+      "category": "Development"
     },
-    "devDependencies": {
-        "@types/node": "^18.17.18",
-        "@types/uuid": "^9.0.4",
-        "@vitejs/plugin-vue": "^4.3.4",
-        "cross-env": "^7.0.3",
-        "electron": "^26.2.2",
-        "electron-builder": "^24.6.4",
-        "eslint": "^8.49.0",
-        "npm-run-all": "^4.1.5",
-        "prettier": "^3.0.3",
-        "typescript": "^5.2.2",
-        "vite": "^4.4.9",
-        "vue-tsc": "^1.8.13"
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@vueuse/core": "^10.4.1",
+    "element-plus": "^2.3.14",
+    "sass": "^1.68.0",
+    "uuid": "^9.0.1",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.4.0",
+    "@types/node": "^18.17.18",
+    "@types/uuid": "^9.0.4",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^26.2.2",
+    "electron-builder": "^24.6.4",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9",
+    "vue-tsc": "^1.8.13"
+  }
 }

@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import {
-  ElButton,
-  ElCard,
-  ElContainer,
-  ElHeader,
-  ElMain,
-  ElRow,
-  ElCol,
-} from 'element-plus';
+import { ElButton, ElCard, ElContainer, ElHeader, ElMain, ElRow, ElCol } from 'element-plus';
 import TitleView from './TitleView.vue';
 import { remote } from '@/remote';
 import { ref, watch } from 'vue';
@@ -19,10 +11,8 @@ const filePaths = ref<string[]>([]);
 const fileSizes = ref<string[]>([]);
 watch(filePaths, async () => {
   fileSizes.value = (
-    await Promise.all(
-      filePaths.value.map(pathname => remote.fs.getFileSize(pathname))
-    )
-  ).map(size => readableSize(size));
+    await Promise.all(filePaths.value.map((pathname) => remote.fs.getFileSize(pathname)))
+  ).map((size) => readableSize(size));
 });
 const openFileClick = async () => {
   const newFilePaths = await remote.fs.openFile({
@@ -60,20 +50,12 @@ const openFileClick = async () => {
           <ElButton @click="openFileClick">Open File</ElButton>
         </template>
         <ElRow>
-          <ElCol :span="24" class="user-select-none">{{
-            `(uuid: ${uuid})`
-          }}</ElCol>
-          <ElCol
-            :span="24"
-            class="user-select-none"
-            v-if="filePaths.length !== 0"
-          >
+          <ElCol :span="24" class="user-select-none">{{ `(uuid: ${uuid})` }}</ElCol>
+          <ElCol :span="24" class="user-select-none" v-if="filePaths.length !== 0">
             File Opened:
           </ElCol>
-          <ElCol :span="24" class="user-select-none" v-else>
-            暂无已经打开的项
-          </ElCol>
-          <ElCol :span="24" v-for="[index, filePath] of filePaths.entries()">
+          <ElCol :span="24" class="user-select-none" v-else> 暂无已经打开的项 </ElCol>
+          <ElCol :span="24" v-for="[index, filePath] of filePaths.entries()" :key="index">
             <span>{{ filePath }}</span>
             <span style="margin-left: 5px" class="user-select-none">
               {{ `(size: ${fileSizes[index]})` }}

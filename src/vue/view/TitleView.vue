@@ -14,5 +14,3 @@ onUnmounted(() => {
   document.title = titleStored.value;
 });
 </script>
-<template>
-</template>

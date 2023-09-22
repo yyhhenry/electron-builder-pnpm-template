@@ -4,16 +4,16 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue()],
-    root: 'src/vue',
-    base: '',
-    build: {
-        emptyOutDir: true,
-        outDir: path.join(__dirname, 'dist/src'),
+  plugins: [vue()],
+  root: 'src/vue',
+  base: '',
+  build: {
+    emptyOutDir: true,
+    outDir: path.join(__dirname, 'dist/src'),
+  },
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src/vue', import.meta.url)),
     },
-    resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('./src/vue', import.meta.url)),
-        },
-    },
+  },
 });
